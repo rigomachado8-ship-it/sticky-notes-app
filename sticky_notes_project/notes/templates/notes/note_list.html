@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Sticky Notes | All Notes
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <div>
+        <h2>All Sticky Notes</h2>
+        <p>Capture ideas, reminders, and important information in one place.</p>
+    </div>
+    <a class="btn btn-primary" href="{% url 'note_create' %}">+ New Note</a>
+</section>
+
+{% if notes %}
+    <section class="notes-grid">
+        {% for note in notes %}
+            <article class="note-card">
+                <h3>{{ note.title }}</h3>
+                <p class="note-meta">Created: {{ note.created_at|date:"d M Y H:i" }}</p>
+                <p class="note-preview">{{ note.content|truncatechars:140 }}</p>
+                <div class="card-actions">
+                    <a class="btn btn-secondary" href="{% url 'note_detail' note.pk %}">View</a>
+                    <a class="btn btn-outline" href="{% url 'note_update' note.pk %}">Edit</a>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
+{% else %}
+    <section class="empty-state">
+        <h3>No notes yet</h3>
+        <p>Create your first sticky note to get started.</p>
+        <a class="btn btn-primary" href="{% url 'note_create' %}">Create First Note</a>
+    </section>
+{% endif %}
+{% endblock %}
