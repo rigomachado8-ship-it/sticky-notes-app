@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Sticky Notes | {{ page_title }}
+{% endblock %}
+
+{% block content %}
+<section class="form-wrapper">
+    <div class="form-card">
+        <h2>{{ page_title }}</h2>
+        <p>Add a clear title and useful content for your sticky note.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Title</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    <div class="form-error">{{ form.title.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Content</label>
+                {{ form.content }}
+                {% if form.content.errors %}
+                    <div class="form-error">{{ form.content.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+                <a href="{% url 'note_list' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

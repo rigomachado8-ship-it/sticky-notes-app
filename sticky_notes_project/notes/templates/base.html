@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
+    <title>
+        {% block title %}
+            Sticky Notes
+        {% endblock %}
+    </title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'notes/styles.css' %}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-content">
+            <h1 class="site-title">
+                <a href="{% url 'note_list' %}">Sticky Notes</a>
+            </h1>
+
+            <nav class="site-nav">
+                <a href="{% url 'note_list' %}">Home</a>
+                <a href="{% url 'note_create' %}">Create Note</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="container main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Sticky Notes App • Built with Django</p>
+        </div>
+    </footer>
+
+</body>
+</html>
